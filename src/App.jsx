@@ -1,24 +1,55 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./css/App.css";
-import MovieCard from "./components/MovieCard";
-import Home from "./pages/Home";
-import { Routes, Route } from "react-router-dom";
-import Favorite from "./pages/Favorite";
-import Navbar from "./components/Navbar";
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
-import MovieContext from "./contexts/MovieContext";
-function App() {
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Favorite from "./pages/Favorite";
+import Login from "./pages/Login";
+import SplashScreen from "./components/SplashScreen";
+
+function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" />;
+}
+
+function AppRoutes() {
   return (
-    <MovieProvider>
-      <Navbar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Favorite" element={<Favorite />} />
-        </Routes>
-      </main>
-    </MovieProvider>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/*"
+        element={
+          <PrivateRoute>
+            <Navbar />
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/favorite" element={<Favorite />} />
+              </Routes>
+            </main>
+          </PrivateRoute>
+        }
+      />
+    </Routes>
+  );
+}
+
+function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 5200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <AuthProvider>
+      <MovieProvider>
+        {showSplash && <SplashScreen />}
+        <AppRoutes />
+      </MovieProvider>
+    </AuthProvider>
   );
 }
 

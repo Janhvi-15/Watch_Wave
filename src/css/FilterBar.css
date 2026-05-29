@@ -1,0 +1,174 @@
+.filter-bar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 10, 40, 0.85),
+    rgba(25, 15, 50, 0.85)
+  );
+  border: 1px solid transparent;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 4px 30px rgba(120, 60, 220, 0.15);
+  animation: filterFadeIn 0.5s ease forwards;
+}
+
+/* Animated gradient border */
+.filter-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(120deg, #7c3aed, #f0a500, #06b6d4, #7c3aed);
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: borderFlow 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes filterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+.filter-group--clear {
+  flex: 0;
+  min-width: unset;
+}
+
+.filter-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #a78bfa, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-left: 2px;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.55rem 2rem 0.55rem 0.9rem;
+  background: rgba(30, 20, 60, 0.7);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 10px;
+  color: #c4b5fd;
+  font-size: 0.85rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s,
+    color 0.25s,
+    box-shadow 0.25s,
+    transform 0.15s;
+}
+
+.filter-select:hover {
+  border-color: rgba(167, 139, 250, 0.7);
+  background-color: rgba(40, 25, 75, 0.85);
+  color: #e9d5ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.2),
+    0 4px 20px rgba(124, 58, 237, 0.3);
+  color: #f5f3ff;
+  transform: translateY(-1px);
+}
+
+.filter-select option {
+  background: #1e1040;
+  color: #c4b5fd;
+}
+
+.filter-clear {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.2),
+    rgba(6, 182, 212, 0.15)
+  );
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  border-radius: 10px;
+  color: #a78bfa;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-clear::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.3),
+    rgba(6, 182, 212, 0.25)
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.filter-clear:hover {
+  border-color: #7c3aed;
+  color: #ddd6fe;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+}
+
+.filter-clear:hover::after {
+  opacity: 1;
+}
