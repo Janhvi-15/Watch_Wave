@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDgBJT4wwRk40SILfdeec7-eaHosl8iWtI",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "watchwave-fadc8.firebaseapp.com",
   projectId: "watchwave-fadc8",
   storageBucket: "watchwave-fadc8.firebasestorage.app",
