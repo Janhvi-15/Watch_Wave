@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import "../css/MovieCard.css";
 import { useMovieContext } from "../contexts/MovieContext";

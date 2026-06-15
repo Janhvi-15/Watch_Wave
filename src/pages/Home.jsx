@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import MovieCard from "../components/MovieCard";
 import FilterBar from "../components/FilterBar";
