@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { getMovieTrailer } from "../services/api";
 import "../css/TrailerModal.css";

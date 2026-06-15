@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMovieContext } from "../contexts/MovieContext";
 import { useAuth } from "../contexts/AuthContext";

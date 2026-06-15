@@ -1,3 +1,4 @@
+import React from "react";
 import "../css/Favorite.css";
 import MovieCard from "../components/MovieCard";
 import { useMovieContext } from "../contexts/MovieContext";

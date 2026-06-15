@@ -1,4 +1,5 @@
 import "../css/SplashScreen.css";
+import React from "react";
 
 function SplashScreen() {
   return (
