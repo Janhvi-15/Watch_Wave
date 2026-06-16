@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import SongsModal from "./SongsModal";
 import "../css/MovieCard.css";
 import { useMovieContext } from "../contexts/MovieContext";
 import TrailerModal from "./TrailerModal";
@@ -8,6 +9,7 @@ function MovieCard({ movie }) {
   const { addToFavorites, removeFromFavorites, isFavorite } = useMovieContext();
   const isMovieFavorite = isFavorite(movie.id);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [showSongs, setShowSongs] = useState(false);
 
   function onFavoriteClick(e) {
     e.preventDefault();
@@ -17,6 +19,12 @@ function MovieCard({ movie }) {
     } else {
       addToFavorites(movie);
     }
+  }
+
+  function onSongsClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowSongs(true);
   }
 
   return (
@@ -34,6 +42,9 @@ function MovieCard({ movie }) {
             >
               ❤️
             </button>
+            <button className="btn-songs" onClick={onSongsClick}>
+              🎵 Songs
+            </button>
           </div>
         </div>
         <div className="movie-info">
@@ -48,6 +59,10 @@ function MovieCard({ movie }) {
           movieTitle={movie.title}
           onClose={() => setShowTrailer(false)}
         />
+      )}
+
+      {showSongs && (
+        <SongsModal movie={movie} onClose={() => setShowSongs(false)} />
       )}
     </>
   );

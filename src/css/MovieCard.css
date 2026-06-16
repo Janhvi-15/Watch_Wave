@@ -100,3 +100,22 @@
   margin: 0;
   font-weight: 400;
 }
+.btn-songs {
+  background: linear-gradient(135deg, #1db954, #17a34a);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.18s,
+    filter 0.18s;
+  margin-top: 0.4rem;
+}
+
+.btn-songs:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
